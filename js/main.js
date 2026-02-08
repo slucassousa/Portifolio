@@ -3,37 +3,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
 
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-    });
+    if (navToggle) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
 
     // Close menu when clicking a link (mobile)
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
+            if (navMenu) {
+                navMenu.classList.remove('active');
+            }
         });
     });
 
-    // Smooth Scroll (Optional polyfill-like behavior if CSS scroll-behavior fails, but usually handled by CSS)
-    // Adding active state to nav links on scroll
-    const sections = document.querySelectorAll('section, header');
+    // Active Link Highlighting based on current URL
+    const currentUrl = window.location.href;
     const navLinks = document.querySelectorAll('.nav-link');
 
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (scrollY >= (sectionTop - 150)) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active');
-            }
-        });
+    navLinks.forEach(link => {
+        // Check if the link href is active in the current URL
+        // We use link.href (absolute) to compare with currentUrl
+        if (currentUrl === link.href || (currentUrl.endsWith('/') && link.getAttribute('href') === 'index.html')) {
+            link.classList.add('active');
+        } else if (currentUrl.includes(link.getAttribute('href'))) {
+            // Fallback for partial matches if needed, but strict match is better for distinct pages
+            // EXCEPT for index.html which might not be in the URL if it's just the root
+            link.classList.add('active');
+        }
     });
 });

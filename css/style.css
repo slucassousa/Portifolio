@@ -186,12 +186,12 @@ img {
 
 /* Subpage Headers */
 .header-research {
-    background-image: url('../images/pato.jpg');
+    background-image: url('../images/research.jpg');
     --overlay-opacity: 0.4;
 }
 
 .header-teaching {
-    background-image: url('../images/pato.jpg');
+    background-image: url('../images/teaching.jpg');
     --overlay-opacity: 0.4;
 }
 
@@ -201,12 +201,7 @@ img {
 }
 
 .header-small-talk {
-    background-image: url('../images/pato.jpg');
-    --overlay-opacity: 0.4;
-}
-
-.header-contact {
-    background-image: url('../images/pato.jpg');
+    background-image: url('../images/small.jpg');
     --overlay-opacity: 0.4;
 }
 
